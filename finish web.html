@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Portofolio Mahasiswa Informatika</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;800&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#eef2fb; --card:#ffffff; --ink:#14213d; --muted:#55627e; --line:#d5dcf0;
+  --accent:#2b50ff; --accent-ink:#ffffff; --pop:#ffc93c;
+  --head:"Bricolage Grotesque","Trebuchet MS",sans-serif;
+  --body:"DM Sans","Segoe UI",Arial,sans-serif;
+}
+:root[data-theme="dark"]{
+  --bg:#0f1730; --card:#18224a; --ink:#eef2ff; --muted:#a4b0d6; --line:#2a376b;
+  --accent:#7d96ff; --accent-ink:#0f1730; --pop:#ffc93c;
+}
+*{box-sizing:border-box;margin:0}
+html{scroll-behavior:smooth;scroll-padding-top:80px}
+body{background:var(--bg);color:var(--ink);font:400 1rem/1.65 var(--body)}
+h1,h2,h3{font-family:var(--head);line-height:1.1}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--pop);outline-offset:3px}
+.wrap{max-width:1000px;margin:0 auto;padding:0 20px}
+section{padding:72px 0}
+h2{font-size:clamp(1.8rem,4vw,2.5rem);margin-bottom:8px}
+.sub{color:var(--muted);margin-bottom:28px;max-width:60ch}
+
+/* tombol */
+.btn{display:inline-flex;align-items:center;gap:8px;border:2px solid var(--ink);background:transparent;color:var(--ink);
+  padding:11px 20px;border-radius:999px;font:700 .95rem var(--body);cursor:pointer;text-decoration:none;
+  transition:transform .15s,background .15s,color .15s}
+.btn:hover{transform:translateY(-2px)}
+.btn:active{transform:translateY(0)}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.btn.pop{background:var(--pop);border-color:var(--pop);color:#14213d}
+.row{display:flex;flex-wrap:wrap;gap:12px}
+
+/* navigasi */
+header{position:sticky;top:0;z-index:10;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+nav{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 0;flex-wrap:wrap}
+.logo{font:800 1.15rem var(--head);text-decoration:none}
+nav ul{display:flex;gap:4px;list-style:none;padding:0;flex-wrap:wrap}
+nav ul a{padding:6px 12px;border-radius:999px;text-decoration:none;font-weight:500;color:var(--muted)}
+nav ul a:hover,nav ul a.on{background:var(--card);color:var(--ink)}
+#theme{width:42px;height:42px;padding:0;justify-content:center;font-size:1.1rem}
+
+/* hero */
+.hero{display:grid;grid-template-columns:1.2fr .8fr;gap:40px;align-items:center;padding-top:56px}
+.hero h1{font-size:clamp(2.6rem,7vw,4.6rem);font-weight:800;letter-spacing:-.02em;margin-bottom:16px}
+.hero p{color:var(--muted);font-size:1.1rem;max-width:46ch;margin-bottom:26px}
+.photo{position:relative;justify-self:center;width:min(300px,80vw)}
+.photo::before{content:"";position:absolute;inset:14px -14px -14px 14px;background:var(--pop);border-radius:36% 64% 52% 48%/48% 40% 60% 52%}
+.photo .frame{position:relative;aspect-ratio:4/5;border-radius:36% 64% 52% 48%/48% 40% 60% 52%;overflow:hidden;background:var(--accent);border:3px solid var(--ink);display:grid;place-items:center}
+.photo img{width:100%;height:100%;object-fit:cover;display:none}
+.photo .init{font:800 5rem var(--head);color:var(--accent-ink)}
+.photo .ganti{position:absolute;bottom:-12px;left:50%;transform:translateX(-50%);z-index:2;background:var(--card);padding:7px 14px;font-size:.85rem}
+
+/* kartu umum */
+.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:24px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+dl{display:grid;grid-template-columns:auto 1fr;gap:8px 18px}
+dt{color:var(--muted)} dd{font-weight:500}
+.card h3{font-size:1.2rem;margin-bottom:12px}
+.card ul{padding-left:18px;color:var(--muted)}
+.card li{margin-bottom:6px}
+
+/* skill */
+.tabs{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px}
+.tab{padding:8px 16px;border-radius:999px;border:2px solid var(--line);background:var(--card);color:var(--ink);font:500 .92rem var(--body);cursor:pointer}
+.tab[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:var(--bg)}
+.skills{display:flex;flex-wrap:wrap;gap:10px;min-height:60px}
+.chip{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:10px 16px;font-weight:500;cursor:default;transition:transform .15s,border-color .15s}
+.chip:hover{transform:translateY(-3px);border-color:var(--accent)}
+.chip small{display:block;color:var(--muted);font-weight:400;font-size:.78rem}
+
+/* prestasi */
+.ach{display:grid;gap:12px}
+.ach button{all:unset;box-sizing:border-box;width:100%;cursor:pointer;display:flex;justify-content:space-between;gap:16px;align-items:center}
+.ach .item{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px 22px}
+.ach .item:focus-within{border-color:var(--accent)}
+.ach .yr{font:800 1.2rem var(--head);color:var(--accent);min-width:56px}
+.ach .t{flex:1;font-weight:700}
+.ach .t small{display:block;font-weight:400;color:var(--muted)}
+.ach .plus{font-size:1.5rem;transition:transform .2s}
+.item.open .plus{transform:rotate(45deg)}
+.ach .more{display:none;margin-top:12px;padding-left:72px;color:var(--muted)}
+.item.open .more{display:block}
+
+/* kontak */
+.contact{display:grid;grid-template-columns:1fr 1fr;gap:20px;align-items:start}
+.links{display:grid;gap:12px}
+.links a,.links button{justify-content:space-between;width:100%}
+footer{padding:28px 0 40px;text-align:center;color:var(--muted);border-top:1px solid var(--line);font-size:.9rem}
+#toast{position:fixed;left:50%;bottom:24px;transform:translate(-50%,80px);background:var(--ink);color:var(--bg);padding:10px 20px;border-radius:999px;font-weight:500;transition:transform .25s;z-index:20}
+#toast.show{transform:translate(-50%,0)}
+
+@media(max-width:760px){
+  .hero,.grid2,.contact{grid-template-columns:1fr}
+  .photo{order:-1}
+  .ach .more{padding-left:0}
+  section{padding:52px 0}
+}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+@media print{
+  header,.tabs,.ganti,#theme,.row,.links,#toast{display:none!important}
+  body{background:#fff;color:#000} .ach .more{display:block!important} section{padding:20px 0}
+  .photo::before{display:none}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <nav>
+      <ul>
+        <li><a href="#about">About</a></li>
+        <li><a href="#skills">What I Can Do</a></li>
+        <li><a href="#achievement">Achievement</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+      <button class="btn" id="theme" aria-label="Ganti tema terang/gelap" title="Ganti tema">🌙</button>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+  <div class="wrap hero">
+    <div>
+      <h1 id="hName"></h1>
+      <p id="hDesc"></p>
+      <div class="row">
+        <button class="btn primary" id="unduh">⬇ Unduh Portofolio</button>
+        <a class="btn" href="#contact">Hubungi Saya</a>
+      </div>
+    </div>
+    <div class="photo">
+      <div class="frame">
+        <span class="init" id="init"></span>
+        <img id="foto" alt="Foto profil">
+      </div>
+      <label class="btn ganti" for="fotoInput">📷 Ganti foto</label>
+      <input type="file" id="fotoInput" accept="image/*" hidden>
+    </div>
+  </div>
+
+  <section id="about"><div class="wrap">
+    <h2>About</h2>
+    <p class="sub" id="aboutDesc"></p>
+    <div class="grid2">
+      <div class="card"><h3>Profil</h3><dl id="profil"></dl></div>
+      <div class="card"><h3>Pendidikan &amp; aktivitas</h3><ul id="aktivitas"></ul></div>
+    </div>
+  </div></section>
+
+  <section id="skills"><div class="wrap">
+    <h2>What I Can Do</h2>
+    <p class="sub">Klik kategori untuk melihat skill dan tools yang saya kuasai.</p>
+    <div class="tabs" id="tabs"></div>
+    <div class="skills" id="skillList" aria-live="polite"></div>
+  </div></section>
+
+  <section id="achievement"><div class="wrap">
+    <h2>Achievement</h2>
+    <p class="sub">Klik salah satu pencapaian untuk melihat detailnya.</p>
+    <div class="ach" id="achList"></div>
+  </div></section>
+
+  <section id="contact"><div class="wrap">
+    <h2>Contact</h2>
+    <div class="contact">
+      <p class="sub" id="cDesc"></p>
+      <div class="links" id="links"></div>
+    </div>
+  </div></section>
+</main>
+
+<footer><div class="wrap" id="foot"></div></footer>
+<div id="toast" role="status"></div>
+
+<script>
+/* =====================================================
+   EDIT DATA DI SINI SAJA. Semua tampilan mengikuti data ini.
+   ===================================================== */
+const DATA = {
+  nama: "Salza Maulidya Anjani",
+  nim: "26050974031",
+  prodi: "S1 Pendidikan Teknologi Informasi",
+  kampus: "Universitas Negeri Surabaya (UNESA)",
+  singkat: "Grow through learning, develop through experience.",
+  tentang: "Saya mahasiswa baru yang tertarik pada teknologi dan pengembangan solusi digital. Di sini saya menyimpan skill, pencapaian, dan karya yang saya banggakan.",
+  aktivitas: [
+    "Mahasiswa Pendidikan Teknologi Informasi, semester 1",
+    "Membangun website portofolio pertama",
+    "Belajar HTML, CSS, JavaScript, Anaconda, VS Code, dll"
+  ],
+  skills: {
+    "Web": [["HTML","Struktur halaman"],["CSS","Tampilan & layout"],["JavaScript","Interaksi"]],
+    "Pemrograman": [["Python","Dasar"],["C++","Dasar"],["Algoritma","Logika & struktur data"]],
+    "Tools": [["VS Code","Editor kode"],["Figma","Desain UI"],["Canva","Desain grafis"],["Tools AI","Claude, ChatGPT"]],
+    "Soft skill": [["Kerja tim",""],["Komunikasi",""],["Manajemen waktu",""]]
+  },
+  prestasi: [
+    {
+      tahun: "2024-2026",
+      nama: "Olimpiade tingkat nasional dan lomba lainnya",
+      lembaga: "Semasa SMA/K",
+      desc: "Mengikuti rangkaian Olimpiade tingkat nasional maupun cabang lomba lainnya semasa SMA/K."
+    }
+  ],
+  kontak: {
+    email: "maulidyasalza24@gmail.com",
+    linkedin: "https://www.linkedin.com/in/salza-maulidya-anjani",
+    fileUnduh: ""
+  }
+};
+
+/* ---------- Render ---------- */
+const $ = id => document.getElementById(id);
+const toast = msg => { const t=$("toast"); t.textContent=msg; t.classList.add("show"); clearTimeout(toast.t); toast.t=setTimeout(()=>t.classList.remove("show"),2200); };
+const esc = s => String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+
+document.title = "Portofolio " + DATA.nama;
+$("hName").textContent = DATA.nama;
+$("hDesc").textContent = DATA.singkat;
+$("init").textContent = DATA.nama.trim().split(/\s+/).map(w=>w[0]).slice(0,2).join("").toUpperCase();
+$("aboutDesc").textContent = DATA.tentang;
+$("profil").innerHTML = [["Nama",DATA.nama],["NIM",DATA.nim],["Prodi",DATA.prodi],["Kampus",DATA.kampus]]
+  .map(([k,v])=>`<dt>${k}</dt><dd>${esc(v)}</dd>`).join("");
+$("aktivitas").innerHTML = DATA.aktivitas.map(a=>`<li>${esc(a)}</li>`).join("");
+$("cDesc").textContent = "Terbuka untuk kolaborasi, magang, dan diskusi seputar teknologi. Pilih cara termudah untuk menghubungi saya.";
+$("foot").textContent = `© ${new Date().getFullYear()} ${DATA.nama}. Dibuat dengan HTML, CSS, dan JavaScript.`;
+
+/* Skill: tab kategori */
+const cats = Object.keys(DATA.skills);
+function showCat(c){
+  [...$("tabs").children].forEach(b=>b.setAttribute("aria-pressed", b.dataset.c===c));
+  $("skillList").innerHTML = DATA.skills[c].map(([n,d])=>`<div class="chip">${esc(n)}${d?`<small>${esc(d)}</small>`:""}</div>`).join("");
+}
+$("tabs").innerHTML = cats.map(c=>`<button class="tab" data-c="${esc(c)}" aria-pressed="false">${esc(c)}</button>`).join("");
+$("tabs").addEventListener("click",e=>{ const b=e.target.closest(".tab"); if(b) showCat(b.dataset.c); });
+showCat(cats[0]);
+
+/* Prestasi: klik untuk buka/tutup */
+$("achList").innerHTML = DATA.prestasi.map((p,i)=>`
+  <div class="item">
+    <button aria-expanded="false" aria-controls="m${i}">
+      <span class="yr">${esc(p.tahun)}</span>
+      <span class="t">${esc(p.nama)}<small>${esc(p.lembaga)}</small></span>
+      <span class="plus" aria-hidden="true">+</span>
+    </button>
+    <div class="more" id="m${i}">${esc(p.desc)}</div>
+  </div>`).join("");
+$("achList").addEventListener("click",e=>{
+  const b=e.target.closest("button"); if(!b) return;
+  const item=b.parentElement, open=item.classList.toggle("open");
+  b.setAttribute("aria-expanded",open);
+});
+
+/* Kontak */
+const k = DATA.kontak;
+$("links").innerHTML = `
+  <button class="btn primary" id="salin"><span>✉ ${esc(k.email)}</span><span>Salin</span></button>
+  <a class="btn" href="mailto:${esc(k.email)}"><span>Kirim email</span><span>↗</span></a>
+  <a class="btn" href="${esc(k.linkedin)}" target="_blank" rel="noopener"><span>LinkedIn</span><span>↗</span></a>`;
+$("salin").onclick = async () => {
+  try { await navigator.clipboard.writeText(k.email); toast("Email disalin"); }
+  catch { toast("Salin manual: " + k.email); }
+};
+
+/* Tombol unduh portofolio */
+$("unduh").onclick = () => {
+  if (k.fileUnduh) {
+    const a = document.createElement("a");
+    a.href = k.fileUnduh; a.download = k.fileUnduh; a.click();
+    toast("Mengunduh portofolio");
+  } else {
+    toast("Pilih “Simpan sebagai PDF” di dialog cetak");
+    setTimeout(()=>window.print(), 600);
+  }
+};
+
+/* Foto profil: pilih dari perangkat (tersimpan di browser ini) */
+const foto = $("foto");
+function setFoto(src){ foto.src=src; foto.style.display="block"; $("init").style.display="none"; }
+try { const s=localStorage.getItem("foto"); if(s) setFoto(s); } catch {}
+$("fotoInput").onchange = e => {
+  const f=e.target.files[0]; if(!f) return;
+  const r=new FileReader();
+  r.onload=()=>{ setFoto(r.result); try{localStorage.setItem("foto",r.result);}catch{} toast("Foto diganti"); };
+  r.readAsDataURL(f);
+};
+/* Untuk foto permanen: simpan foto.jpg di folder yang sama, lalu aktifkan baris ini: */
+/* setFoto("foto.jpg"); */
+
+/* Tema terang/gelap */
+const root=document.documentElement, tbtn=$("theme");
+function setTheme(t){ root.dataset.theme=t; tbtn.textContent = t==="dark"?"☀️":"🌙"; try{localStorage.setItem("tema",t);}catch{} }
+let saved=null; try{saved=localStorage.getItem("tema");}catch{}
+setTheme(saved || (matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light"));
+tbtn.onclick=()=>setTheme(root.dataset.theme==="dark"?"light":"dark");
+
+/* Menu aktif saat scroll */
+const links=[...document.querySelectorAll("nav ul a")];
+new IntersectionObserver(es=>es.forEach(e=>{
+  if(e.isIntersecting) links.forEach(a=>a.classList.toggle("on",a.getAttribute("href")==="#"+e.target.id));
+}),{rootMargin:"-40% 0px -55% 0px"}).observe && document.querySelectorAll("section").forEach(s=>{
+  new IntersectionObserver(es=>es.forEach(e=>{
+    if(e.isIntersecting) links.forEach(a=>a.classList.toggle("on",a.getAttribute("href")==="#"+s.id));
+  }),{rootMargin:"-40% 0px -55% 0px"}).observe(s);
+});
+</script>
+</body>
+</html>
